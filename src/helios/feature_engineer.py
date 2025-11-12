@@ -316,6 +316,5 @@ class FeatureEngineer:
             'mean_auc': mean_auc,
             'auc_scores': auc_scores,
             'distribution_shift': mean_auc > 0.75,  # Threshold for significant shift
-            'interpretation': 'Low shift' if mean_auc < 0.6 else 
-                            'Moderate shift' if mean_auc < 0.75 else 'High shift'
+            'interpretation': 'Low shift' if mean_auc < 0.6 else 'Moderate shift' if mean_auc < 0.75 else 'High shift'
         }
