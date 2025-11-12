@@ -1,0 +1,21 @@
+# Helios ML Framework Dependencies
+# Python 3.10+ required
+
+# Core ML libraries
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Data processing and validation
+scipy>=1.11.0
+
+# Utilities
+pyyaml>=6.0
+joblib>=1.3.0
+
+# Optional for notebooks
+jupyter>=1.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
