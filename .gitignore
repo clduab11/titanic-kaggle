@@ -343,6 +343,32 @@ paket-files/
 **/__pycache__/
 *.pyc
 
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data files
+data/*.csv
+data/*.pkl
+data/*.parquet
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+
+# Logs and audit trails
+logs/
+audit_trails/
+*.log
+
 # Cake - Uncomment if you are using it
 #tools/**
 #!tools/packages.config
