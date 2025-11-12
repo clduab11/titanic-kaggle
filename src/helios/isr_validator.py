@@ -5,7 +5,7 @@ Ensures T ≥ 1.5 for model stability and reliability.
 
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 

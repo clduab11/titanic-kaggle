@@ -1,7 +1,8 @@
-# Helios ML Framework Configuration Files
+"""
+Helios ML Framework Configuration Files
 
 This directory contains configuration files for the Helios ML framework.
 
-## Files
-
-- `config.py`: Main configuration with ISR/QMV thresholds and model parameters
+Files:
+- config.py: Main configuration with ISR/QMV thresholds and model parameters
+"""
