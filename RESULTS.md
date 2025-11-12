@@ -98,13 +98,14 @@ All models demonstrated excellent consistency across folds, meeting the C < 0.03
 ## Predictions
 
 ### Test Set Predictions (418 passengers)
-- **Predicted Deaths (0):** 263 (62.9%)
-- **Predicted Survivors (1):** 155 (37.1%)
+- **Predicted Deaths (0):** 244 (58.4%)
+- **Predicted Survivors (1):** 174 (41.6%)
+- **Method:** Final blended ensemble (majority vote)
 
 ### Comparison with Training Set
 - **Training Survival Rate:** 38.38%
-- **Test Prediction Rate:** 37.08%
-- **Difference:** -1.3 percentage points (well-aligned)
+- **Test Prediction Rate:** 41.63%
+- **Difference:** +3.25 percentage points
 
 ### Output Files
 - `data/submission.csv` - Kaggle-ready submission file
@@ -128,6 +129,15 @@ All models demonstrated excellent consistency across folds, meeting the C < 0.03
 | LightGBM | 0.1999 | 19.99% |
 | Logistic Regression | 0.1957 | 19.57% |
 
+### Final Submission Method
+- **Approach:** Majority vote blend of three ensemble techniques (stacked + weighted + rank_average)
+- **Logic:** Prediction = 1 if at least 2 of 3 methods predict survival, else 0
+- **Output Files:** submissions/submission_final.csv and submission.csv (identical)
+- **Alternative methods generated:**
+  - Stacked predictions: 258 died / 160 survived (61.7% / 38.3%)
+  - Weighted voting: 246 died / 172 survived (58.9% / 41.1%)
+  - Rank average: 208 died / 210 survived (49.8% / 50.2%)
+
 ---
 
 ## Audit Trail
@@ -136,6 +146,8 @@ All models demonstrated excellent consistency across folds, meeting the C < 0.03
 1. `audit_trails/isr_audit_trail.csv` - ISR validation records
 2. `audit_trails/qmv_audit_trail.csv` - QMV monitoring records
 3. `pipeline_output_fixed.log` - Complete pipeline execution log
+
+**Note:** ISR and QMV audit trail CSV files are generated at runtime by enhanced_pipeline.py and stored in the audit_trails/ directory (not committed to version control). To regenerate: run `python enhanced_pipeline.py` and examine audit_trails/isr_audit_trail.csv and audit_trails/qmv_audit_trail.csv.
 
 ### Reproducibility
 - **Random Seed:** 42 (all models)
