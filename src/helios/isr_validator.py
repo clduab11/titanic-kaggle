@@ -16,7 +16,7 @@ class ISRMetrics:
     timestamp: datetime
     isr_value: float
     is_valid: bool
-    threshold: float = 1.5
+    threshold: float = 2.0
     feature_stability: Dict[str, float] = field(default_factory=dict)
     metadata: Dict = field(default_factory=dict)
 
@@ -33,12 +33,12 @@ class ISRValidator:
         audit_trail (List[ISRMetrics]): Historical ISR validation records
     """
     
-    def __init__(self, threshold: float = 1.5):
+    def __init__(self, threshold: float = 2.0):
         """
         Initialize ISR Validator.
-        
+
         Args:
-            threshold: Minimum ISR threshold (default: 1.5)
+            threshold: Minimum ISR threshold (default: 2.0 for enhanced validation)
         """
         self.threshold = threshold
         self.audit_trail: List[ISRMetrics] = []
