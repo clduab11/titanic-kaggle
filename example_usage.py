@@ -230,6 +230,8 @@ def main():
         
         # Generate predictions
         submission = generate_predictions(ensemble, X_test, test_df)
+        # Save submission to CSV
+        submission.to_csv('submission.csv', index=False)
         
         # Export audit trails
         export_audit_trails(isr_validator, qmv_monitor)
