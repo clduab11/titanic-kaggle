@@ -16,7 +16,7 @@ class QMVMetrics:
     timestamp: datetime
     qmv_value: float
     is_valid: bool
-    threshold: float = 0.03
+    threshold: float = 0.02
     metric_variances: Dict[str, float] = field(default_factory=dict)
     metadata: Dict = field(default_factory=dict)
 
@@ -33,12 +33,12 @@ class QMVMonitor:
         audit_trail (List[QMVMetrics]): Historical QMV monitoring records
     """
     
-    def __init__(self, threshold: float = 0.03):
+    def __init__(self, threshold: float = 0.02):
         """
         Initialize QMV Monitor.
-        
+
         Args:
-            threshold: Maximum QMV threshold (default: 0.03)
+            threshold: Maximum QMV threshold (default: 0.02 for enhanced validation)
         """
         self.threshold = threshold
         self.audit_trail: List[QMVMetrics] = []

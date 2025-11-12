@@ -118,13 +118,26 @@ class FeatureEngineer:
                     if x in self.encoders['Deck'].classes_ else -1
                 )
         
+        # RLAD: Family and ticket grouping features (no leakage)
+        if 'Name' in df.columns:
+            df['Surname'] = df['Name'].apply(lambda x: x.split(',')[0].strip())
+
+            # Family size by surname (safe feature)
+            surname_counts = df.groupby('Surname')['Surname'].transform('count')
+            df['SurnameCount'] = surname_counts
+
+            # Ticket group size (safe feature)
+            if 'Ticket' in df.columns:
+                ticket_counts = df.groupby('Ticket')['Ticket'].transform('count')
+                df['TicketGroupSize'] = ticket_counts
+
         # RLAD: Interaction features
         if 'Pclass' in df.columns and 'Sex_encoded' in df.columns:
             df['Pclass_Sex'] = df['Pclass'] * 10 + df['Sex_encoded']
-        
+
         if 'Pclass' in df.columns and 'AgeBin' in df.columns:
             df['Pclass_Age'] = df['Pclass'] * 10 + df['AgeBin']
-        
+
         return df
     
     def _extract_title(self, df: pd.DataFrame) -> pd.Series:
@@ -209,9 +222,10 @@ class FeatureEngineer:
         numeric_features = [
             'Pclass', 'Age', 'SibSp', 'Parch', 'Fare',
             'FamilySize', 'IsAlone', 'FarePerPerson',
-            'AgeBin', 'IsChild', 'HasCabin'
+            'AgeBin', 'IsChild', 'HasCabin',
+            'SurnameCount', 'TicketGroupSize'
         ]
-        
+
         encoded_features = [
             'Sex_encoded', 'Title_encoded', 'Embarked_encoded',
             'Deck_encoded', 'Pclass_Sex', 'Pclass_Age'
