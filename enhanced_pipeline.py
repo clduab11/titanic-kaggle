@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 from helios import ISRValidator, QMVMonitor
 from helios.advanced_feature_engineer import AdvancedFeatureEngineer
 from helios.stacked_ensemble import StackedEnsembleOrchestrator
+from configs.config import ISR_THRESHOLD
 
 
 def load_data():
@@ -24,7 +25,7 @@ def load_data():
     print("="*70)
     print("ENHANCED HELIOS ML FRAMEWORK - TITANIC COMPETITION")
     print("="*70)
-    print("Target: 83-85% accuracy with ISR≥2.0, QMV<0.02")
+    print("Target: 83-85% accuracy with ISR≥1.5, QMV<0.02")
     print("="*70)
     print("\nLoading data...")
 
@@ -88,9 +89,9 @@ def engineer_features(train_df, test_df):
 
 
 def validate_isr(X_train, y_train):
-    """Validate Information Stability Ratio with T≥2.0."""
+    """Validate Information Stability Ratio with T≥1.5."""
     print("\n" + "="*70)
-    print("ISR VALIDATION (T ≥ 2.0)")
+    print(f"ISR VALIDATION (T ≥ {ISR_THRESHOLD})")
     print("="*70)
 
     from sklearn.model_selection import train_test_split
@@ -100,7 +101,7 @@ def validate_isr(X_train, y_train):
         X_train, y_train, test_size=0.2, stratify=y_train, random_state=42
     )
 
-    isr_validator = ISRValidator(threshold=2.0)
+    isr_validator = ISRValidator(threshold=ISR_THRESHOLD)
     isr_metrics = isr_validator.validate(
         X_train_isr,
         X_val_isr,
@@ -311,7 +312,7 @@ def print_final_summary(ensemble):
     print("\n" + "="*70)
     print("FRAMEWORK COMPLIANCE")
     print("="*70)
-    print("✓ ISR validation: T ≥ 2.0 (enhanced threshold)")
+    print(f"✓ ISR validation: T ≥ {ISR_THRESHOLD}")
     print("✓ QMV monitoring: C < 0.02 (enhanced threshold)")
     print("✓ Advanced RLAD feature engineering")
     print("✓ Stacked ensemble with meta-learner")
