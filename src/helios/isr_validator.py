@@ -234,6 +234,10 @@ class ISRValidator:
         enhanced_metadata = metadata.copy() if metadata else {}
         enhanced_metadata['n_samples'] = n_samples
         enhanced_metadata['sample_size_adjustment'] = adjustment_factor
+        if adjustment_factor > 1.0:
+            enhanced_metadata['adjustment_note'] = (
+                f"ISR adjusted for small dataset (n={n_samples}, adjustment={adjustment_factor:.1f}x)"
+            )
         
         # Create metrics object
         metrics = ISRMetrics(
