@@ -120,7 +120,7 @@ class ISRValidator:
             n_samples: Number of samples in the training set
             
         Returns:
-            Adjustment factor (1.0 for large datasets, up to 6.0 for very small datasets)
+            Adjustment factor (1.0 for large datasets, up to 7.0 for very small datasets)
         """
         if n_samples >= 1000:
             return 1.0
