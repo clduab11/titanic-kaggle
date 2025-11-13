@@ -127,7 +127,7 @@ class ISRValidator:
         
         # Enhanced adjustment for small datasets
         # For n=712 (80% of 891 after split): factor≈4.3
-        # For n=500: factor≈6.0 (capped)
+        # For n=500: factor=7.0 (capped)
         # For n=891: factor≈2.45
         
         normalized = n_samples / 1000.0
