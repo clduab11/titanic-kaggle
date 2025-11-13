@@ -12,6 +12,7 @@ import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from helios import ISRValidator, QMVMonitor, FeatureEngineer, EnsembleOrchestrator
+from configs.config import ISR_THRESHOLD
 
 
 def load_data():
@@ -64,7 +65,7 @@ def prepare_features(feature_engineer, train_engineered, test_engineered):
 def validate_isr(X_train, y_train):
     """Validate Information Stability Ratio."""
     print("\n" + "="*60)
-    print("ISR VALIDATION (T ≥ 1.5)")
+    print(f"ISR VALIDATION (T ≥ {ISR_THRESHOLD})")
     print("="*60)
     
     from sklearn.model_selection import train_test_split
@@ -74,7 +75,7 @@ def validate_isr(X_train, y_train):
         X_train, y_train, test_size=0.2, stratify=y_train, random_state=42
     )
     
-    isr_validator = ISRValidator(threshold=1.5)
+    isr_validator = ISRValidator(threshold=ISR_THRESHOLD)
     isr_metrics = isr_validator.validate(
         X_train_isr,
         X_val_isr,
@@ -193,7 +194,7 @@ def print_summary(ensemble):
         print("✗ Accuracy below target range")
     
     print("\nHelios ML Framework Complete!")
-    print("  ✓ ISR-governed (T≥1.5)")
+    print(f"  ✓ ISR-governed (T≥{ISR_THRESHOLD})")
     print("  ✓ QMV-monitored (C<0.03)")
     print("  ✓ RLAD feature engineering")
     print("  ✓ MoT ensemble voting")
@@ -205,7 +206,7 @@ def main():
     print("="*60)
     print("HELIOS ML FRAMEWORK - TITANIC COMPETITION")
     print("="*60)
-    print("ISR-governed (T≥1.5), QMV-monitored (C<0.03)")
+    print(f"ISR-governed (T≥{ISR_THRESHOLD}), QMV-monitored (C<0.03)")
     print("Multi-agent system with RLAD and MoT ensemble")
     print("="*60)
     

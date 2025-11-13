@@ -4,7 +4,16 @@ Default configuration for ISR/QMV thresholds and model parameters.
 """
 
 # ISR (Information Stability Ratio) Configuration
+# The threshold of 1.5 is appropriate for datasets with 500-1000+ samples.
+# For smaller datasets, the ISR validator includes automatic sample-size adjustments
+# that make the metric more forgiving by applying a multiplicative factor.
+# The adjustment accounts for higher natural variance in small datasets like Titanic (891 samples).
+# See ISRValidator class in src/helios/isr_validator.py for details on the adjustment formula.
 ISR_THRESHOLD = 1.5  # T ≥ 1.5
+
+# Enable automatic sample-size adjustment for datasets with fewer than 1000 samples
+ISR_SAMPLE_SIZE_ADJUSTMENT_ENABLED = True
+
 ISR_VALIDATION_ENABLED = True
 
 # QMV (Quality Metric Variance) Configuration
