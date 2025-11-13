@@ -12,7 +12,6 @@ Default configuration for ISR/QMV thresholds and model parameters.
 ISR_THRESHOLD = 1.5  # T ≥ 1.5
 
 # Enable automatic sample-size adjustment for datasets with fewer than 1000 samples
-ISR_SAMPLE_SIZE_ADJUSTMENT_ENABLED = True
 
 ISR_VALIDATION_ENABLED = True
 
