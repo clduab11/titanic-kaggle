@@ -214,11 +214,11 @@ class ISRValidator:
         Returns:
             ISRMetrics object with validation results
         """
-        isr_value = self.compute_isr(X_train, X_val, feature_weights)
-        
-        # Compute per-feature stability for audit trail
         n_samples = len(X_train)
         adjustment_factor = self._compute_sample_size_adjustment(n_samples)
+        isr_value = self.compute_isr(X_train, X_val, feature_weights, adjustment_factor=adjustment_factor)
+        
+        # Compute per-feature stability for audit trail
         
         feature_stability = {}
         for col in X_train.columns:
